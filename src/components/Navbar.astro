@@ -1,0 +1,21 @@
+---
+const { nav_suffix } = Astro.props;
+---
+
+<main class="w-screen font-mono pt-7 flex items-center justify-center">
+  <nav class="flex flex-col w-4/5 h-20 relative px-16">
+    <div class="path_div pl-3 flex items-center text-xl border w-full h-1/2">
+      <h2>/ mehar {nav_suffix}</h2>
+    </div>
+    <div class="border w-full h-1/2 flex items-center justify-center">
+      <div class="nav-links w-full flex justify-around">
+        <a href="/" class="inline-block hover">[ home ]</a>
+        <a href="/about" class="inline-block hover">[ about ]</a><a
+          href="/projects"
+          class="inline-block hover">[ projects ]</a
+        >
+        <a href="/blogs" class="inline-block hover">[ blogs ]</a>
+      </div>
+    </div>
+  </nav>
+</main>
