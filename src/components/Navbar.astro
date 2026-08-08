@@ -5,20 +5,25 @@ const { nav_suffix } = Astro.props;
 ---
 
 <main class="w-screen font-mono pt-7 flex items-center justify-center">
-  <nav class="flex flex-col w-4/5 h-20 relative px-16">
+  <nav class="flex flex-col w-3/4 h-20 relative">
     <div class="path_div px-3 font-semibold flex items-center justify-between text-xl border w-full h-1/2">
       <h2>/ mehar {nav_suffix}</h2>
       <ThemeToggle />
     </div>
-    <div class="border w-full h-1/2 flex items-center justify-center ">
+    <div class="border border-t-0 w-full h-1/2 flex items-center justify-center ">
       <div class="nav-links w-full flex justify-around font-semibold">
-        <a href="/" class="inline-block hover">[ home ]</a>
-        <a href="/about" class="inline-block hover">[ about ]</a><a
+        <a href="/" class="inline-block hover:bg-zinc-700">[ home ]</a>
+        <!-- <a href="/about" class="inline-block hover:bg-zinc-700">[ about ]</a> -->
+        
+        <a
           href="/projects"
-          class="inline-block hover">[ projects ]</a
+          class="inline-block hover:bg-zinc-700">[ projects ]</a
         >
-        <a href="/blogs" class="inline-block hover">[ blogs ]</a>
+        <a href="/blogs" class="inline-block hover:bg-zinc-700">[ blogs ]</a>
+        <a href="/now" class="inline-block hover:bg-zinc-700">[ now ]</a>
+        <a href="/gallery" class="inline-block hover:bg-zinc-700">[ gallery ]</a>
       </div>
     </div>
+
   </nav>
 </main>
