@@ -1,10 +1,56 @@
 ---
-import Navbar from '../components/Navbar.astro';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from "astro:content";
+import Navbar from "../components/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+
+const posts = await getCollection("blog");
+
+
+
 ---
 
-<Layout>
-		<Navbar nav_suffix="/ blogs"/>
-        <h1>blogs page</h1>
+<Navbar nav_suffix="/ blogs" />
 
+<Layout>
+  <main class="w-full min-h-[70vh] flex justify-center">
+    <div class="relative w-3/4 py-3 flex flex-col">
+      <h1 class="my-3 font-bold">
+        I just want a digital place to share my experience on internet and i
+        think blogs are my way of doing that.
+      </h1>
+
+      <div class="flex flex-col gap-2 flex-1">
+        <div
+          class="w-full h-30 p-3 flex gap-3 bg-(--light-bg-2) dark:bg-(--dark-bg-2)"
+        >
+          <a class="underline h-full aspect-square" href="/blog/template">
+            <img
+              class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
+              src="/src/assets/blog_imgs/template.jpg"
+              alt="template blog"
+            />
+          </a>
+          <div class="w-full h-full pr-4">
+            <h1 class="font-semibold">
+              <a class="underline" href="/blog/template"
+                >Template Blog (heheh)</a
+              >
+            </h1>
+            <h3 class="tracking-tight opacity-85">
+              This is just a template blog to test out my blog's ui and its just
+              here for the demo, I may remove this in future tho.
+            </h3>
+            <h4 class="text-right">10-08-2026</h4>
+          </div>
+        </div>
+        <!-- <BlogCard blog={posts}/> -->
+        <div class="w-full min-h-25 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
+        </div>
+        <div class="w-full min-h-25 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
+        </div>
+        <div class="w-full min-h-25 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>

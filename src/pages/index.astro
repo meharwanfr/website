@@ -50,7 +50,7 @@ import Layout from "../layouts/Layout.astro";
           <a
             href="https://github.com/meharwanfr"
             target="_blank"
-            class="text-xl flex items-center gap-2 underline"
+            class="text-md flex items-center gap-2 underline"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -68,7 +68,7 @@ import Layout from "../layouts/Layout.astro";
           <a
             href="https://github.com/meharwanfr"
             target="_blank"
-            class="text-xl flex items-start gap-2 underline"
+            class="text-md1 flex items-start gap-2 underline"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,7 +87,7 @@ import Layout from "../layouts/Layout.astro";
           <a
             href="https://github.com/meharwanfr"
             target="_blank"
-            class="text-xl flex items-start gap-3 underline"
+            class="text-md1 flex items-start gap-3 underline"
           >
             X/Twitter
 
@@ -104,7 +104,7 @@ import Layout from "../layouts/Layout.astro";
           <a
             href="https://github.com/meharwanfr"
             target="_blank"
-            class="text-xl flex items-start gap-3 underline"
+            class="text-md1 flex items-start gap-3 underline"
           >
             meharwanfr@gmail.com
             <svg
@@ -120,7 +120,11 @@ import Layout from "../layouts/Layout.astro";
         </div>
       </div>
 
-      <a href="/projects" class="inline-block text-xl font-semibold mt-6 mb-3 underline">projects</a>
+      <a
+        href="/projects"
+        class="inline-block text-xl font-semibold mt-6 mb-3 underline"
+        >projects</a
+      >
       <ul class="">
         <li class="my-3">
           <a href="github.com" target="_blank" class="underline">gh-dlp</a> - A cli
@@ -132,11 +136,66 @@ import Layout from "../layouts/Layout.astro";
         </li>
       </ul>
 
-      <a href="/blogs" class="inline-block text-xl font-semibold mt-6 mb-3 underline">blogs</a>
+      <a
+        href="/blogs"
+        class="inline-block text-xl font-semibold mt-6 mb-3 underline">blogs</a
+      >
       <ul class="">
         <li class="my-3">
-          <a href="coming-soon" target="_blank" class="underline">a blog</a> - coming soon</li>
+          <a href="coming-soon" target="_blank" class="underline">a blog</a> - coming
+          soon
+        </li>
       </ul>
+
+      <!-- WIP thing, pls ignore for now
+      
+      <div>
+        <canvas
+          id="myCanvas"
+          width="full"
+          height="200"
+          style="border:1px solid #000000;"
+        >
+         
+        </canvas>
+  
+    </div>
+     -->
     </div>
   </main>
 </Layout>
+
+<!-- WIP thing, pls ignore for now
+<script>
+  const canvas = document.getElementById("myCanvas") as HTMLCanvasElement;
+
+  const ctx = canvas?.getContext("2d");
+
+  if (canvas && ctx) {
+    ctx.fillStyle = "#1e1e1e";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    const blockSize = 20;
+
+    const blockWidth = canvas.width / blockSize;
+    const blockHeight = canvas.height / blockSize;
+
+    const gap = 2;
+
+    const renderSize = blockSize - gap;
+
+    const renderWidth = blockWidth - gap;
+    const renderHeight = blockHeight - gap;
+
+    for (let x = 0; x < canvas.width; x += blockWidth) {
+      for (let y = 0; y < canvas.height; y += blockHeight) {
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 0.2; // Adjust the border thickness as needed
+
+        ctx.strokeRect(x, y, renderWidth, renderHeight);
+        // ctx.fillStyle = '#000';
+        // ctx.fillText(`${x} ${y}`, x, y)
+      }
+    }
+  }
+</script> -->
