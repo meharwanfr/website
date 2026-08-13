@@ -1,12 +1,24 @@
 ---
+import { getImage } from "astro:assets";
+
 const {title, description, pubDate, image , id} = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{jpeg,jpg,png,gif,webp}');
+
+const imagePath = image.startsWith('/') ? image : `/${image}`;
+
+if (!images[imagePath]) {
+  throw new Error(`"${imagePath}" does not exist in glob pattern.`);
+}
+
+const optimizedImage = await getImage({ src: images[imagePath]() });
 ---
 
 <div class="w-full h-30 p-3 flex gap-3 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
   <a class="underline h-full aspect-square" href={`/blog/ ${id}`}>
     <img
       class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
-      src={image}
+      src={optimizedImage.src}
       alt="template blog"
     />
   </a>
