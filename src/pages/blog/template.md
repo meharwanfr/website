@@ -15,6 +15,37 @@ image: "/src/assets/blog_imgs/template.jpg"
 draft: false
 ---
 
-# How I Built My Website
+# Heading 1
+## Heading 2
+### Heading 3
+#### Heading 4
+##### Heading 5
+###### Heading 6
 
-Astro is an excellent framework for content-focused websites...
+- [ ] A CheckBox 
+- [x] A Checked CheckBox 
+
+
+<br>
+
+A list of list thingy :-
+- list **thingy 1**
+- list ~thingy 2~
+- list _thingy 3_
+
+
+<br>
+
+## Code Snippets :-
+
+```js
+// JavaScript code with syntax highlighting.
+var fun = function lang(l) {
+  dateformat.i18n = require('./lang/' + l);
+  return true;
+};
+```
+
+<br>
+
+<hr>

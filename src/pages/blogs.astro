@@ -5,8 +5,6 @@ import Layout from "../layouts/Layout.astro";
 
 const posts = await getCollection("blog");
 
-
-
 ---
 
 <Navbar nav_suffix="/ blogs" />
@@ -30,7 +28,7 @@ const posts = await getCollection("blog");
               alt="template blog"
             />
           </a>
-          <div class="w-full h-full pr-4">
+          <div class="w-full h-full pr-4 flex flex-col justify-between">
             <h1 class="font-semibold">
               <a class="underline" href="/blog/template"
                 >Template Blog (heheh)</a
@@ -43,7 +41,7 @@ const posts = await getCollection("blog");
             <h4 class="text-right">10-08-2026</h4>
           </div>
         </div>
-        <!-- <BlogCard blog={posts}/> -->
+
         <div class="w-full min-h-25 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
         </div>
         <div class="w-full min-h-25 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">

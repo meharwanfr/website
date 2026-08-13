@@ -2,8 +2,7 @@
 import "../global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
-import {type CollectionEntry } from "astro:content";
-
+import { type CollectionEntry } from "astro:content";
 
 interface Props {
   frontmatter: {
@@ -24,7 +23,7 @@ const { frontmatter } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={frontmatter.description} />
     <title>{frontmatter.title}</title>
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.jpg" />
 
     <script is:inline>
       const theme = (() => {
@@ -51,19 +50,60 @@ const { frontmatter } = Astro.props;
   </head>
 
   <body
-    class="transition-colors font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light`-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
+    class="w-screen overflow-x-hidden transition-colors font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
   >
+
+  
     <Navbar />
 
     <main class="w-screen min-h-[70vh] flex justify-center">
       <div class="w-3/4 py-3">
-        {frontmatter.title}
-        <p>{frontmatter.description}</p>
-        <img src={frontmatter.image} alt="">
-        <slot />
+        <br />
+        <div
+          class="w-full h-40 p-3 flex gap-3 bg-(--light-bg-2) dark:bg-(--dark-bg-2)"
+        >
+          <a class="underline h-full aspect-square" href="/blog/template">
+            <img
+              class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
+              src="/src/assets/blog_imgs/template.jpg"
+              alt="template blog"
+            />
+          </a>
+          <div class="w-full h-full pr-4 flex flex-col justify-between">
+            <div>
+              <h1 class="font-semibold">
+                <a class="underline" href="/blog/template"
+                  >Template Blog (heheh)</a
+                >
+              </h1>
+              <h3 class="tracking-tight opacity-85">
+                This is just a template blog to test out my blog's ui and its
+                just here for the demo, I may remove this in future tho.
+              </h3>
+            </div>
+            <div>
+              <h4 class="text-right">10-08-2026</h4>
+            </div>
+          </div>
+        </div>
+
+        <br />
+        <div
+          class="prose-p:inline-block prose-li:before:content-['-'] prose-li:before:mr-2 prose-li:before:inline-block
+  prose-h1:font-bold prose-h1:text-3xl
+  prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
+  prose-headings:underline  prose-h2:text-2xl prose-h3:text-xl prose-h4:text-[1.1875rem] prose-h5:text-[18px] prose-h6:text-[16px] prose-headings:my-2"
+        >
+          <slot class="prose-span:bg-red-900"/>
+
+        </div>
+        
       </div>
     </main>
 
     <Footer />
+   
   </body>
+
+
 </html>
