@@ -2,7 +2,7 @@
 
 layout: ../../layouts/BlogLayout.astro
 slug: "template"
-title: "Template Blog (heheh)"
+title: "Template Blog"
 description: "This is just a template blog to test out my blog's ui and its just here for the demo, I may remove this in future tho."
 pubDate: 2026-08-10
 updatedDate: 2026-08-10
@@ -11,7 +11,7 @@ tags:
   - web-dev
   - template
 author: "Meharwan Singh"
-image: "/src/assets/blog_imgs/template.jpg"
+image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Drawing%2C_The_State_Coach%2C_ca._1856_%28CH_18348079%29.jpg/500px-Drawing%2C_The_State_Coach%2C_ca._1856_%28CH_18348079%29.jpg"
 draft: false
 ---
 

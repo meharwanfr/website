@@ -6,11 +6,11 @@ const { nav_suffix } = Astro.props;
 
 <main class="w-screen font-mono p-3 md:pt-7 flex items-center justify-center">
   <nav class="flex flex-col w-full md:w-3/4  relative">
-    <div class="path_div p-2 font-semibold flex items-center justify-between text-md md:text-xl border w-full h-1/2">
+    <div class="path_div p-2 font-semibold flex items-center justify-between text-md md:text-xl border border-neutral-800 w-full h-1/2">
       <h2>/ mehar {nav_suffix}</h2>
       <ThemeToggle />
     </div>
-    <div class="border border-t-0 w-full flex items-center justify-center ">
+    <div class="border border-neutral-800 border-t-0 w-full flex items-center justify-center ">
       <div class="nav-links text-md gap-y-2 w-full flex justify-around flex-wrap px-2 py-3 font-semibold">
         <a href="/" class="inline-block dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ home ]</a>
         <a href="/about" class="inline-block dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ about ]</a>
