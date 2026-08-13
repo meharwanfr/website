@@ -14,7 +14,56 @@ html.dark .astro-code span {
 
 pre {
     margin: 1rem 0;
+    position: relative;
+    padding: 1rem;
+    padding-top: 2rem;
 }
+
+.copyToClipboard {
+    width: fit-content;
+    height: 2rem;
+    background-color: rgb(96, 208, 96);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: all linear .3s;
+}
+
+.copyToClipboard:active {
+    scale: .60;
+}
+
+.copyToClipboard svg {
+    height: 100%;
+}
+
+html.dark .copyToClipboard:hover {
+    background-color: var(--dark-bg-2);
+}
+
+html.dark .copyToClipboard {
+    background-color: var(--dark-bg-4);
+}
+
+
+.copyToClipboard:hover {
+    background-color: var(--light-bg-3);
+}
+
+.copyToClipboard {
+    background-color: var(--light-bg-4);
+}
+
+
+
+
+
 
 :root {
     --dark-bg-0: #0D0D0D;

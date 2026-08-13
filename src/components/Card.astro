@@ -17,7 +17,7 @@ const optimizedImage = await getImage({ src: images[imagePath]() });
 <div class="w-full h-30 p-3 flex gap-3 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
   <a class="underline h-full aspect-square" href={`/blog/ ${id}`}>
     <img
-      class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
+      class="h-full aspect-square grayscale dark:contrast-75 dark:mix-blend-color-dodge"
       src={optimizedImage.src}
       alt="template blog"
     />

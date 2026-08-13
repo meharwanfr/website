@@ -3,6 +3,7 @@ import "../global.css";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import { type CollectionEntry } from "astro:content";
+import Card from "../components/Card.astro";
 
 interface Props {
   frontmatter: {
@@ -10,10 +11,13 @@ interface Props {
     description?: string;
     image: string;
     slug: string;
+    pubDate: Date;
   };
 }
 
 const { frontmatter } = Astro.props;
+
+const dateObj = new Date(frontmatter.pubDate);
 ---
 
 <!doctype html>
@@ -53,60 +57,63 @@ const { frontmatter } = Astro.props;
   <body
     class="w-screen overflow-x-hidden transition-colors font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
   >
-
-  
     <Navbar nav_suffix={`/ blog / ${frontmatter.slug}`} />
 
     <main class="w-screen min-h-[70vh] flex justify-center">
       <div class="w-3/4 py-3">
         <br />
-        <div
-          class="w-full h-40 p-3 flex gap-3 bg-(--light-bg-2) dark:bg-(--dark-bg-2)"
-        >
-          <a class="underline h-full aspect-square" href="/blog/template">
-            <img
-              class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
-              src={frontmatter.image}
-              alt="template blog"
-            />
-          </a>
-          <div class="w-full h-full pr-4 flex flex-col justify-between">
-            <div>
-              <h1 class="font-semibold">
-                <a class="underline" href="/blog/template"
-                  >Template Blog (heheh)</a
-                >
-              </h1>
-              <h3 class="tracking-tight opacity-85">
-                This is just a template blog to test out my blog's ui and its
-                just here for the demo, I may remove this in future tho.
-              </h3>
-            </div>
-            <div>
-              <h4 class="text-right">10-08-2026</h4>
-            </div>
-          </div>
-        </div>
 
+        <Card
+          title={frontmatter.title}
+          id={frontmatter.slug}
+          description={frontmatter.description}
+          image={frontmatter.image}
+          pubDate={dateObj}
+        />
         <br />
         <div
           class="prose-p:inline-block prose-li:before:content-['-'] prose-li:before:mr-2 prose-li:before:inline-block
   prose-h1:font-bold prose-h1:text-3xl
   prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
-  prose-headings:underline  prose-h2:text-2xl prose-h3:text-xl prose-h4:text-[1.1875rem] prose-h5:text-[18px] prose-h6:text-[16px] prose-headings:my-2"
+  prose-headings:underline prose-h2:text-2xl prose-h3:text-xl prose-h4:text-[1.1875rem] prose-h5:text-[18px] prose-h6:text-[16px] prose-headings:my-2"
         >
-          <slot class="prose-span:bg-red-900"/>
-
+          <slot class="prose-span:bg-red-900 prose-pre:relative" />
         </div>
-        
       </div>
     </main>
 
     <Footer />
-   
   </body>
 
+  <script>
+    const codeblock = document.querySelector("code");
 
+    const addCopyToClipboardElement = (codeblock: HTMLElement | null) => {
+      if (!codeblock) return;
 
+      const clipboardElem = document.createElement("div");
+      clipboardElem.classList.add("copyToClipboard");
 
+      const clipboardSvg =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z"></path></svg>';
+      clipboardElem.innerHTML = `${clipboardSvg} Copy`;
+
+      clipboardElem.addEventListener("click", () => {
+        navigator.clipboard.writeText(codeblock.textContent);
+
+        clipboardElem.innerHTML = `${clipboardSvg} Copied`;
+
+        setTimeout(() =>{
+          clipboardElem.innerHTML = `${clipboardSvg} Copy`
+        }, 1000);
+      });
+
+      const parentElem = codeblock.parentElement;
+      parentElem?.appendChild(clipboardElem);
+
+      console.log(codeblock.parentElement);
+    };
+
+    addCopyToClipboardElement(codeblock);
+  </script>
 </html>
