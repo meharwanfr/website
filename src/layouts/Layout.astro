@@ -4,7 +4,7 @@ import Footer from "../components/Footer.astro";
 ---
 
 <!doctype html>
-<html lang="en">
+<html class="overflow-x-hidden w-screen" lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -38,7 +38,7 @@ import Footer from "../components/Footer.astro";
     
   </head>
   <body
-    class="transition-colors font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light`-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
+    class="transition-colors overflow-x-hidden font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light`-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
   >
     <slot />
     <Footer></Footer>
