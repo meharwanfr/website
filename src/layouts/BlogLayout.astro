@@ -9,6 +9,7 @@ interface Props {
     title: string;
     description?: string;
     image: string;
+    slug: string;
   };
 }
 
@@ -54,7 +55,7 @@ const { frontmatter } = Astro.props;
   >
 
   
-    <Navbar />
+    <Navbar nav_suffix={`/ blog / ${frontmatter.slug}`} />
 
     <main class="w-screen min-h-[70vh] flex justify-center">
       <div class="w-3/4 py-3">
@@ -65,7 +66,7 @@ const { frontmatter } = Astro.props;
           <a class="underline h-full aspect-square" href="/blog/template">
             <img
               class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
-              src="/src/assets/blog_imgs/template.jpg"
+              src={frontmatter.image}
               alt="template blog"
             />
           </a>
@@ -104,6 +105,8 @@ const { frontmatter } = Astro.props;
     <Footer />
    
   </body>
+
+
 
 
 </html>

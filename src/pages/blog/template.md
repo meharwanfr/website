@@ -1,7 +1,7 @@
 ---
 
 layout: ../../layouts/BlogLayout.astro
-
+slug: "template"
 title: "Template Blog (heheh)"
 description: "This is just a template blog to test out my blog's ui and its just here for the demo, I may remove this in future tho."
 pubDate: 2026-08-10
@@ -21,10 +21,6 @@ draft: false
 #### Heading 4
 ##### Heading 5
 ###### Heading 6
-
-- [ ] A CheckBox 
-- [x] A Checked CheckBox 
-
 
 <br>
 

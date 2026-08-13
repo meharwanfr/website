@@ -1,0 +1,22 @@
+---
+const {title, description, pubDate, image , id} = Astro.props;
+---
+
+<div class="w-full h-30 p-3 flex gap-3 bg-(--light-bg-2) dark:bg-(--dark-bg-2)">
+  <a class="underline h-full aspect-square" href={`/blog/ ${id}`}>
+    <img
+      class="h-full aspect-square grayscale contrast-75 mix-blend-color-dodge"
+      src={image}
+      alt="template blog"
+    />
+  </a>
+  <div class="w-full h-full pr-4 flex flex-col justify-between">
+    <h1 class="font-semibold">
+      <a class="underline" href="/blog/template">{title}</a>
+    </h1>
+    <h3 class="tracking-tight opacity-85">
+      {description}
+    </h3>
+    <h4 class="text-right">{pubDate.toLocaleDateString()}</h4>
+  </div>
+</div>
