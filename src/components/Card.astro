@@ -1,8 +1,8 @@
 ---
 import { getImage } from "astro:assets";
 
-const { title, description, pubDate, image, id } = Astro.props;
-let optimizedImage: {src: string} = {src: ""};
+const { title, description, pubDate, image, id, link } = Astro.props;
+let optimizedImage: { src: string } = { src: "" };
 
 if (!image.startsWith("http")) {
   const images = import.meta.glob<{ default: ImageMetadata }>(
@@ -20,24 +20,34 @@ if (!image.startsWith("http")) {
   optimizedImage.src = image;
 }
 ---
-<div class="w-full p-3 border border-neutral-300 dark:border-neutral-800 flex flex-col md:flex-row gap-4">
+
+<div
+  class="w-full p-3 border border-neutral-300 dark:border-neutral-800 flex flex-col md:flex-row gap-4"
+>
   <a
     class="block w-full md:w-36 h-48 md:h-36 aspect-square shrink-0 overflow-hidden bg-neutral-500"
-    href={`/blog/${id}`}
+    target={!id ? "_blank" : ""}
+    href={!id ? link : `/blog/${id}`}
   >
-    <img 
-      class="w-full h-full object-cover opacity-70" 
-      src={optimizedImage.src} 
-      alt={title} 
+    <img
+      class="w-full h-full object-cover opacity-70"
+      src={optimizedImage.src}
+      alt={title}
     />
   </a>
 
   <div class="w-full flex flex-col justify-between min-w-0">
     <div class="flex flex-col gap-1">
       <h1 class="font-semibold text-lg leading-snug">
-        <a class="hover:underline" href={`/blog/${id}`}>{title}</a>
+        <a
+          class="hover:underline"
+          target={!id ? "_blank" : ""}
+          href={!id ? link : `/blog/${id}`}>{title}</a
+        >
       </h1>
-      <h3 class="text-sm tracking-tight opacity-85 line-clamp-3 md:line-clamp-2">
+      <h3
+        class="text-sm tracking-tight opacity-85 line-clamp-3 md:line-clamp-2"
+      >
         {description}
       </h3>
     </div>

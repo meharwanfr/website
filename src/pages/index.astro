@@ -1,13 +1,22 @@
 ---
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
+
+
+const projects = [
+  {title: "gh-dlp", desc: "a cli tool to download subfolders of a github repo", link:"https://github.com/meharwanfr/gh-dlp"},
+  
+  {title: "purpl", desc: "a fullstack perplexity like ai platform with web searches, follow up questions, LLM streaming response", link:"https://github.com/meharwanfr/purpl"},
+
+  {title: "dotfiles", desc: "my linux setup dotfiles", link:"https://github.com/meharwanfr/dotfiles"},
+]
 ---
 
 <Layout>
   <Navbar nav_suffix="/ home" />
 
   <main class="w-screen min-h-[70vh] flex justify-center">
-    <div class="w-6/7 sm:w-3/4 sm:py-3">
+    <div class="w-6/7 sm:w-3/4 px-3 sm:py-3">
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 my-4">
         <span class="flex items-center gap-4">
           <img
@@ -126,14 +135,31 @@ import Layout from "../layouts/Layout.astro";
         >projects</a
       >
       <ul class="">
+
+        {projects.map(project => (
+          <li class="my-3">
+          <a href={project.link} target="_blank" class="underline">{project.title}</a> - {project.desc}.
+        </li>
+        ))}
+<!--         
+         <li class="my-3">
+          <a href="https://github.com/meharwanfr/gh-dlp" target="_blank" class="underline">gh-dlp</a> - A cli
+          tool to download github repo's subfolders.
+        </li>
+
+         <li class="my-3">
+          <a href="https://github.com/meharwanfr/gh-dlp" target="_blank" class="underline">gh-dlp</a> - A cli
+          tool to download github repo's subfolders.
+        </li>
+
         <li class="my-3">
-          <a href="github.com" target="_blank" class="underline">gh-dlp</a> - A cli
+          <a href="https://github.com/meharwanfr/gh-dlp" target="_blank" class="underline">gh-dlp</a> - A cli
           tool to download github repo's subfolders.
         </li>
         <li class="my-3">
-          <a href="github.com" target="_blank" class="underline">dotfiles</a> - my
+          <a href="https://github.com/meharwanfr/dotfiles" target="_blank" class="underline">dotfiles</a> - my
           linux dotfiles.
-        </li>
+        </li> -->
       </ul>
 
       <a
