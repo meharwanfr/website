@@ -14,7 +14,6 @@ if (!image.startsWith("http")) {
   if (!images[imagePath]) {
     throw new Error(`"${imagePath}" does not exist in glob pattern.`);
   }
-  ``;
   optimizedImage = await getImage({ src: images[imagePath]() });
 } else {
   optimizedImage.src = image;
