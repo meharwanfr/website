@@ -30,7 +30,10 @@ const dateObj = new Date(frontmatter.pubDate);
     <meta name="description" content={frontmatter.description} />
     <title>{frontmatter.title}</title>
     <link rel="icon" href="/favicon.jpg" />
-
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="0e753dd5-654f-4ab0-99ad-31f8be1e7075"></script>
     <script is:inline>
       const theme = (() => {
         if (
@@ -104,8 +107,8 @@ const dateObj = new Date(frontmatter.pubDate);
 
         clipboardElem.innerHTML = `${clipboardSvg} Copied`;
 
-        setTimeout(() =>{
-          clipboardElem.innerHTML = `${clipboardSvg} Copy`
+        setTimeout(() => {
+          clipboardElem.innerHTML = `${clipboardSvg} Copy`;
         }, 1000);
       });
 
@@ -115,7 +118,7 @@ const dateObj = new Date(frontmatter.pubDate);
       console.log(codeblock.parentElement);
     };
 
-    codeblocks.forEach(codeblock => addCopyToClipboardElement(codeblock));
+    codeblocks.forEach((codeblock) => addCopyToClipboardElement(codeblock));
     // addCopyToClipboardElement(codeblock);
   </script>
 </html>

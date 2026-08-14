@@ -11,7 +11,10 @@ import Footer from "../components/Footer.astro";
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.jpg" />
     <link rel="icon" href="/favicon.jpg" />
-
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="0e753dd5-654f-4ab0-99ad-31f8be1e7075"></script>
     <title>mehar</title>
     <script is:inline>
       const theme = (() => {
@@ -35,12 +38,11 @@ import Footer from "../components/Footer.astro";
 
       window.localStorage.setItem("theme", theme);
     </script>
-    
   </head>
   <body
     class="transition-colors overflow-x-hidden font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light`-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
   >
     <slot />
-    <Footer></Footer>
+    <Footer />
   </body>
 </html>
