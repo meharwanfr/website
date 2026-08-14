@@ -3,28 +3,35 @@ import { getCollection } from "astro:content";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 
+const blogs = await getCollection("blog");
+blogs.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  const blogs = await getCollection("blog");
-
-  console.log("posts" , blogs);
-
+console.log("posts", blogs);
 ---
 
-
 <Layout>
-<Navbar nav_suffix="/ blogs" />
+  <Navbar nav_suffix="/ blogs" />
 
-  <main class="w-full min-h-[70vh] flex justify-center">
-    <div class="relative w-6/7 px-3 sm:w-3/4 sm:py-3 flex flex-col">
-      <h1 class="text-sm my-2 sm:text-md sm:my-3 font-bold">
-        I just want a digital place to share my experience on internet and i
-        think blogs are my way of doing that.
-      </h1>
+  <PageLayout>
+    <h1 class="text-sm my-2 sm:text-md sm:my-3 font-bold">
+      I just want a digital place to share my experience on internet and i think
+      blogs are my way of doing that.
+    </h1>
 
-      <div class="flex flex-col gap-2 flex-1">
-        {blogs.map(blog =>  (<Card title={blog.data.title} id={blog.id} description={blog.data.description} image={blog.data.image} pubDate={blog.data.pubDate}  />))}
-      </div>
+    <div class="flex flex-col gap-2 flex-1">
+      {
+        blogs.map((blog) => (
+          <Card
+            title={blog.data.title}
+            id={blog.id}
+            description={blog.data.description}
+            image={blog.data.image}
+            pubDate={blog.data.pubDate}
+          />
+        ))
+      }
     </div>
-  </main>
+  </PageLayout>
 </Layout>

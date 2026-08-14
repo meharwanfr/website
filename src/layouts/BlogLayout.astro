@@ -6,8 +6,6 @@ import Footer from "../components/Footer.astro";
 import { type CollectionEntry } from "astro:content";
 import Card from "../components/Card.astro";
 
-
-
 interface Props {
   frontmatter: {
     title: string;
@@ -89,7 +87,7 @@ const dateObj = new Date(frontmatter.pubDate);
   </body>
 
   <script>
-    const codeblock = document.querySelector("code");
+    const codeblocks = document.querySelectorAll("code");
 
     const addCopyToClipboardElement = (codeblock: HTMLElement | null) => {
       if (!codeblock) return;
@@ -117,6 +115,7 @@ const dateObj = new Date(frontmatter.pubDate);
       console.log(codeblock.parentElement);
     };
 
-    addCopyToClipboardElement(codeblock);
+    codeblocks.forEach(codeblock => addCopyToClipboardElement(codeblock));
+    // addCopyToClipboardElement(codeblock);
   </script>
 </html>

@@ -2,13 +2,12 @@
 import Card from "../components/Card.astro";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 
-function convertToDate(str: string){
+function convertToDate(str: string) {
   const date = new Date(str);
   return date;
-
 }
-
 
 const projects = [
   {
@@ -16,8 +15,7 @@ const projects = [
     desc: "a cli tool to download subfolders of a github repo",
     link: "https://github.com/meharwanfr/gh-dlp",
     image: "https://github.com/meharwanfr/gh-dlp/raw/main/assets/demo.png",
-    pubDate: convertToDate("2025")
-
+    pubDate: convertToDate("2025"),
   },
 
   {
@@ -25,26 +23,24 @@ const projects = [
     desc: "a fullstack perplexity like ai platform with web searches, follow up questions, LLM streaming response",
     link: "https://github.com/meharwanfr/purpl",
     image: "https://github.com/meharwanfr/purpl/raw/main/previews/home.png",
-    pubDate: convertToDate("2026")
-
+    pubDate: convertToDate("2026"),
   },
 
   {
     title: "dotfiles",
     desc: "my linux setup dotfiles",
     link: "https://github.com/meharwanfr/dotfiles",
-    image: "https://github.com/meharwanfr/dotfiles/raw/main/Previews/alpha_page_nvim.png",
-    pubDate: convertToDate("2025")
-
+    image:
+      "https://github.com/meharwanfr/dotfiles/raw/main/Previews/alpha_page_nvim.png",
+    pubDate: convertToDate("2025"),
   },
 ];
 ---
 
 <Layout>
   <Navbar nav_suffix="/ projects" />
-
-  <main class="w-screen min-h-[70vh] flex justify-center">
-    <div class="w-6/7 sm:w-3/4 px-3 sm:py-3 flex flex-col gap-y-3">
+  <PageLayout>
+    <div class="flex flex-col gap-y-3">
       {
         projects.map((project) => (
           <Card
@@ -57,5 +53,5 @@ const projects = [
         ))
       }
     </div>
-  </main>
+  </PageLayout>
 </Layout>
