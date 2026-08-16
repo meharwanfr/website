@@ -4,26 +4,150 @@ import ThemeToggle from "./ThemeToggle.astro";
 const { nav_suffix } = Astro.props;
 ---
 
-<main class="w-screen font-mono p-3 md:pt-7 flex items-center justify-center">
-  <nav class="flex flex-col w-full md:w-3/4  relative">
-    <div class="path_div p-2 font-semibold flex items-center justify-between text-md md:text-xl border border-neutral-800 w-full h-1/2">
-      <h2>/ mehar {nav_suffix}</h2>
+<main
+  class="w-screen p-3 md:pt-7 flex items-center justify-center font-ibm-mono"
+>
+  <nav class="flex flex-col w-full md:w-3/4 relative">
+    <div
+      class="path_div p-2 dark:text-(--dark-fg-2) font-semibold flex items-center justify-between md:text-xl lg:text-2xl border-2 border-neutral-800 w-full h-1/2"
+    >
+      <h2 class="">/ mehar {nav_suffix}</h2>
       <ThemeToggle />
     </div>
-    <div class="border border-neutral-800 border-t-0 w-full flex items-center justify-center ">
-      <div class="nav-links text-md gap-y-2 w-full flex justify-around flex-wrap px-2 py-3 font-semibold">
-        <a href="/" class="inline-block no-underline dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ home ]</a>
-        <a href="/about" class="inline-block no-underline dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ about ]</a>
-        
+    <nav
+      class="w-full border-2 border-neutral-800 border-t-0"
+      aria-label="Main navigation"
+    >
+      <div
+        class="mx-auto grid w-full
+      grid-cols-2 sm:grid-cols-3 lg:grid-cols-4
+      xl:flex
+      xl:items-center xl:justify-between
+      gap-px lg:gap-1
+      p-1.5 sm:p-2"
+      >
+        <a
+          href="/"
+          class="group flex items-center justify-center
+        px-3 py-2.5 sm:px-4 sm:py-3
+        text-base sm:text-lg lg:text-xl
+        font-semibold
+        no-underline
+        transition-colors duration-150
+        hover:bg-(--light-selbg)
+        dark:hover:bg-(--dark-selbg)
+        dark:text-(--dark-fg-2)"
+        >
+          <span>[h]</span>
+          <span class="ml-1.5">home</span>
+        </a>
+
+        <a
+          href="/about"
+          class="group flex items-center justify-center
+        px-3 py-2.5 sm:px-4 sm:py-3
+        text-base sm:text-lg lg:text-xl
+        font-semibold
+        no-underline
+        transition-colors duration-150
+        hover:bg-(--light-selbg)
+        dark:hover:bg-(--dark-selbg)
+        dark:text-(--dark-fg-2)"
+        >
+          <span>[a]</span>
+          <span class="ml-1.5">about</span>
+        </a>
+
         <a
           href="/projects"
-          class="inline-block no-underline dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ projects ]</a
+          class="group flex items-center justify-center
+        px-3 py-2.5 sm:px-4 sm:py-3
+        text-base sm:text-lg lg:text-xl
+        font-semibold
+        no-underline
+        transition-colors duration-150
+        hover:bg-(--light-selbg)
+        dark:hover:bg-(--dark-selbg)
+        dark:text-(--dark-fg-2)"
         >
-        <a href="/blogs" class="inline-block no-underline dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ blogs ]</a>
-        <a href="/now" class="inline-block no-underline dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ now ]</a>
-        <a href="/gallery" class="inline-block no-underline dark:hover:bg-(--dark-selbg) hover:bg-(--light-selbg)">[ gallery ]</a>
-      </div>
-    </div>
+          <span>[p]</span>
+          <span class="ml-1.5">projects</span>
+        </a>
 
+        <a
+          href="/blogs"
+          class="group flex items-center justify-center
+        px-3 py-2.5 sm:px-4 sm:py-3
+        text-base sm:text-lg lg:text-xl
+        font-semibold
+        no-underline
+        transition-colors duration-150
+        hover:bg-(--light-selbg)
+        dark:hover:bg-(--dark-selbg)
+        dark:text-(--dark-fg-2)"
+        >
+          <span>[b]</span>
+          <span class="ml-1.5">blogs</span>
+        </a>
+
+        <a
+          href="/now"
+          class="group flex items-center justify-center
+        px-3 py-2.5 sm:px-4 sm:py-3
+        text-base sm:text-lg lg:text-xl
+        font-semibold
+        no-underline
+        transition-colors duration-150
+        hover:bg-(--light-selbg)
+        dark:hover:bg-(--dark-selbg)
+        dark:text-(--dark-fg-2)"
+        >
+          <span>[n]</span>
+          <span class="ml-1.5">now</span>
+        </a>
+
+        <a
+          href="/gallery"
+          class="group flex items-center justify-center
+        px-3 py-2.5 sm:px-4 sm:py-3
+        text-base sm:text-lg lg:text-xl
+        font-semibold
+        no-underline
+        transition-colors duration-150
+        hover:bg-(--light-selbg)
+        dark:hover:bg-(--dark-selbg)
+        dark:text-(--dark-fg-2)"
+        >
+          <span>[g]</span>
+          <span class="ml-1.5">gallery</span>
+        </a>
+      </div>
+    </nav>
   </nav>
 </main>
+
+<script>
+  window.addEventListener("keypress", (e) => {
+    console.log(e.key);
+    if (e.key == "b") {
+      window.location.href = "/blogs";
+    }
+
+    if (e.key == "p") {
+      window.location.href = "/projects";
+    }
+    if (e.key == "h") {
+      window.location.href = "/";
+    }
+    if (e.key == "a") {
+      window.location.href = "/about";
+    }
+    if (e.key == "n") {
+      window.location.href = "/now";
+    }
+    if (e.key == "g") {
+      window.location.href = "/gallery";
+    }
+  
+  });
+</script>

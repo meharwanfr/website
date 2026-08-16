@@ -2,9 +2,21 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @plugin '@tailwindcss/typography';
 
+/* * {
+      font-family: "Atkinson Hyperlegible", sans-serif;
+
+} */
+
+@theme {
+  --font-aktinson: "Atkinson Hyperlegible", sans-serif;
+  --font-ibm-mono: "IBM Plex Mono", monospace;
+  --font-ibm-serif: "IBM Plex Serif", serif;
+
+
+}
 
 :root {
-    --dark-bg-0: #0D0D0D;
+    --dark-bg-0: #111214;
     --dark-bg-1: #121212;
     --dark-bg-2: #333333;
     --dark-bg-3: #212121;
