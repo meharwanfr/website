@@ -25,7 +25,12 @@ draft: false
 ##### Heading 5
 
 ###### Heading 6
+<br>
 
+this is just a normal text paragraph to test out my styling skills which pretty much sucks by the way, i am still working on the ui continuously , if you see any spelling mistakes , feel free to dm me via my socials maybe from discord, twitter or anything but not the email tho that'l be kinda funny but i guess you shouldn't do that lmao.
+
+
+<br>
 <br>
 
 A list of list thingy :-

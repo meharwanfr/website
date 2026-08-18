@@ -83,7 +83,7 @@ const projects = [
       </span>
     </div> -->
     <hr class="opacity-20">
-    <p class="leading-8 tracking-wide my-7 ">
+    <p class="leading-8 tracking-wide my-7 text-lg ">
       A computer science student who loves tech and travelling
       around the world. My niche interest includes <span class="italic opacity-90"
         >cycling</span
@@ -177,18 +177,22 @@ const projects = [
       class="inline-block md:text-xl lg:text-3xl font-semibold mt-6 p-1 ">projects</a
     >
 
-    <ul class="pl-4 relative -mt-2 pt-3">
+    <ul class="relative -mt-2 pt-3 grid grid-cols-3 w-full h-44 gap-2">
       <!-- <div class="w-0.5 h-full left-0 bg-neutral-700 absolute"></div> -->
       {
         projects.map((project) => (
-          <li class="my-3 relative">
-            <a href={project.link} target="_blank" class="relative italic underline underline-offset-4 decoration-1 decoration-neutral-600">
-          {/* <div class="h-0.5 w-2 bg-neutral-700 absolute -left-4 top-1/2"></div> */}
+          <div class=" p-2 ">
+            <a href={project.link} class="text-lg underline font-bold">{ project.title}</a>
+            <p class="my-2">{project.desc}</p>
+          </div>
+          // <li class="my-3 relative">
+          //   <a href={project.link} target="_blank" class="relative italic underline underline-offset-4 decoration-1 decoration-neutral-600">
+          // {/* <div class="h-0.5 w-2 bg-neutral-700 absolute -left-4 top-1/2"></div> */}
 
-              {project.title}
-            </a>{" "}
-            - {project.desc}.
-          </li>
+          //     {project.title}
+          //   </a>{" "}
+          //   - {project.desc}.
+          // </li>
         ))
       }
       
