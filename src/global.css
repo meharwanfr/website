@@ -2,6 +2,141 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @plugin '@tailwindcss/typography';
 
+html {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+body {
+    min-width: 0;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    color: var(--text-primary);
+    background-color: var(--page-background);
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+    color: var(--text-heading);
+    line-height: 1.3;
+    text-wrap: balance;
+}
+
+a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+}
+
+:where(main p a, .reading-content a) {
+    text-decoration-line: underline;
+}
+
+a:hover {
+    text-decoration-line: underline;
+}
+
+:where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 4px;
+}
+
+::selection {
+    background: var(--selection-background);
+    color: var(--text-heading);
+}
+
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+
+.skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.5rem 1rem;
+    color: var(--text-heading);
+    background: var(--page-background);
+    transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+img, video, canvas, svg {
+    max-width: 100%;
+}
+
+pre {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-wrap: normal;
+}
+
+.site-container {
+    width: 100%;
+    min-width: 0;
+    max-width: 76rem;
+    padding-inline: 0.875rem;
+}
+
+.reading-content {
+    max-width: 68ch;
+    line-height: 1.85;
+}
+
+.reading-content :where(p, ul, ol, blockquote) {
+    margin-block: 1em;
+}
+
+.reading-content :where(h1, h2, h3, h4, h5, h6) {
+    margin-block: 1.75em 0.5em;
+    font-weight: 700;
+}
+
+.reading-content > :first-child { margin-top: 0; }
+
+.reading-content :where(ul, ol) { padding-inline-start: 1.4em; }
+.reading-content ul { list-style-type: disc; }
+.reading-content ol { list-style-type: decimal; }
+.reading-content li { margin-block: 0.4em; }
+.reading-content blockquote {
+    border-inline-start: 2px solid var(--text-muted);
+    padding-inline-start: 1em;
+    color: var(--text-secondary);
+}
+.reading-content :where(code, pre) { font-family: var(--font-ibm-mono); }
+.reading-content code { font-size: 0.875em; }
+.reading-content pre code { font-size: 0.875rem; }
+.reading-content :where(h1, h2) { font-size: 1.75rem; }
+.reading-content h3 { font-size: 1.375rem; }
+.reading-content h4 { font-size: 1.1875rem; }
+.reading-content :where(h5, h6) { font-size: 1.0625rem; }
+
+.gallery-caption {
+    background: var(--caption-background);
+    color: var(--text-secondary);
+}
+
+nav a[aria-current="page"] {
+    color: var(--text-heading);
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+}
+
+@media (min-width: 640px) {
+    body { font-size: 1.125rem; }
+    .site-container {
+        width: 75%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 /* * {
       font-family: "Atkinson Hyperlegible", sans-serif;
 
@@ -66,7 +201,7 @@
     --light-bg-3: #E5E7EB;
     --light-bg-4: #D1D5DB;
 
-    --light-fg-0: #1a1e29c8;
+    --light-fg-0: #1A1E29;
     --light-fg-1: #222a36;
     --light-fg-2: #4B5563;
     --light-fg-3: #6B7280;
@@ -101,4 +236,26 @@
     --light-gray: #6B7280;
     --light-gray-1: #9CA3AF;
     --light-gray-2: #4B5563;
+
+    color-scheme: light;
+    --page-background: var(--light-bg-0);
+    --text-heading: var(--light-fg-0);
+    --text-primary: var(--light-fg-1);
+    --text-secondary: var(--light-fg-2);
+    --text-muted: #586270;
+    --focus-ring: var(--light-blue);
+    --selection-background: var(--light-selbg);
+    --caption-background: var(--light-bg-3);
+}
+
+:root.dark {
+    color-scheme: dark;
+    --page-background: var(--dark-bg-0);
+    --text-heading: var(--dark-fg-0);
+    --text-primary: var(--dark-fg-1);
+    --text-secondary: var(--dark-fg-2);
+    --text-muted: var(--dark-gray-1);
+    --focus-ring: #93C5FD;
+    --selection-background: var(--dark-selbg);
+    --caption-background: var(--dark-bg-3);
 }

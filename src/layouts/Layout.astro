@@ -1,14 +1,21 @@
 ---
 import "../global.css";
 import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = "mehar", description } = Astro.props;
 ---
 
 <!doctype html>
-<html class="overflow-x-hidden w-screen" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+    {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.jpg" />
     <link rel="icon" href="/favicon.jpg" />
     <script
@@ -16,7 +23,7 @@ import Footer from "../components/Footer.astro";
       src="/stats/script.js"
       data-host-url="/stats"
       data-website-id="0e753dd5-654f-4ab0-99ad-31f8be1e7075"></script>
-    <title>mehar</title>
+    <title>{title}</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,31 +33,20 @@ import Footer from "../components/Footer.astro";
     />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
     <script is:inline>
-      const theme = (() => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
-        return "light";
-      })();
-
-      if (theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
+      let theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      try {
+        const saved = window.localStorage.getItem("theme");
+        if (saved === "dark" || saved === "light") theme = saved;
+      } catch {
+        // Fall back to the system preference when browser storage is unavailable.
       }
-
-      window.localStorage.setItem("theme", theme);
+      document.documentElement.classList.toggle("dark", theme === "dark");
     </script>
   </head>
   <body
-    class="transition-colors overflow-x-hidden font-aktinson duration-300 dark:bg-(--dark-bg-0) bg-(--light`-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
+    class="transition-colors font-aktinson duration-300"
   >
+    <a class="skip-link" href="#main-content">skip to content</a>
     <slot />
     <Footer />
   </body>

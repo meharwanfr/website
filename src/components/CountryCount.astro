@@ -1,0 +1,23 @@
+---
+const countries = [
+  { name: "Singapore", flag: "🇸🇬", event: "arcana - hack club" },
+  { name: "Japan", flag: "🇯🇵", event: "shiba - hack club" },
+];
+---
+
+<section class="my-8" aria-labelledby="countries-heading">
+  <h2 id="countries-heading" class="text-3xl font-semibold">countries visited</h2>
+  <p class="mt-2 mb-4 text-lg"><span class="font-bold">{countries.length}</span> countries so far, plenty more to go.</p>
+  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+    {countries.map((country) => (
+      <li class="flex items-center gap-3 border border-neutral-300 dark:border-neutral-800 p-3 min-w-0">
+        <span class="text-3xl shrink-0" aria-hidden="true">{country.flag}</span>
+        <div class="min-w-0">
+          <h3 class="font-semibold text-lg">{country.name}</h3>
+          <p class="text-muted">{country.event}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+  <a class="inline-block mt-3 underline underline-offset-4" href="/gallery">some photos from my trips</a>
+</section>

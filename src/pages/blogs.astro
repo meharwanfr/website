@@ -8,14 +8,14 @@ import PageLayout from "../layouts/PageLayout.astro";
 const blogs = await getCollection("blog");
 blogs.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-console.log("posts", blogs);
+
 ---
 
 <Layout>
   <Navbar nav_suffix="/ blogs" />
 
   <PageLayout>
-    <h1 class="text-xl tracking-wide my-2 sm:text-md sm:my-3">
+    <h1 class="text-xl leading-relaxed max-w-[68ch] my-3">
       I just want a digital place to share my experience on internet and i think
       blogs are my favorite way of doing that.
     </h1>

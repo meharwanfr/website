@@ -1,17 +1,17 @@
 ---
 import ThemeToggle from "./ThemeToggle.astro";
 
-const { nav_suffix } = Astro.props;
+const { nav_suffix = "" } = Astro.props;
 ---
 
-<main
-  class="w-screen p-3 md:pt-7 flex items-center justify-center font-ibm-mono"
+<header
+  class="w-full pt-3 md:pt-7 flex items-center justify-center font-ibm-mono"
 >
-  <nav class="flex flex-col w-full md:w-3/4 relative">
+  <div class="site-container flex flex-col relative">
     <div
-      class="path_div p-2 dark:text-(--dark-fg-2) font-semibold flex items-center justify-between md:text-xl lg:text-2xl border-2 border-neutral-800 w-full h-1/2"
+      class="path_div p-2 gap-3 dark:text-(--dark-fg-2) font-semibold flex items-center justify-between md:text-xl lg:text-2xl border-2 border-neutral-800 w-full"
     >
-      <h2 class="">/ mehar {nav_suffix}</h2>
+      <p class="min-w-0 leading-snug">/ mehar {nav_suffix}</p>
       <ThemeToggle />
     </div>
     <nav
@@ -20,7 +20,7 @@ const { nav_suffix } = Astro.props;
     >
       <div
         class="mx-auto grid w-full
-      grid-cols-2 sm:grid-cols-3 lg:grid-cols-4
+      grid-cols-1 min-[320px]:grid-cols-2 sm:grid-cols-3
       xl:flex
       xl:items-center xl:justify-between
       gap-px lg:gap-1
@@ -28,8 +28,10 @@ const { nav_suffix } = Astro.props;
       >
         <a
           href="/"
-          class="group flex items-center justify-center
-        px-3 py-2.5 sm:px-4 sm:py-3
+          aria-current={Astro.url.pathname.replace(/\/$/, "") === "" ? "page" : undefined}
+          aria-keyshortcuts="h"
+          class="group flex items-center justify-center whitespace-nowrap
+        px-2 py-2.5 sm:px-3 sm:py-3
         text-base sm:text-lg lg:text-xl
         font-semibold
         no-underline
@@ -44,8 +46,10 @@ const { nav_suffix } = Astro.props;
 
         <a
           href="/about"
-          class="group flex items-center justify-center
-        px-3 py-2.5 sm:px-4 sm:py-3
+          aria-current={Astro.url.pathname.replace(/\/$/, "") === "/about" ? "page" : undefined}
+          aria-keyshortcuts="a"
+          class="group flex items-center justify-center whitespace-nowrap
+        px-2 py-2.5 sm:px-3 sm:py-3
         text-base sm:text-lg lg:text-xl
         font-semibold
         no-underline
@@ -60,8 +64,10 @@ const { nav_suffix } = Astro.props;
 
         <a
           href="/projects"
-          class="group flex items-center justify-center
-        px-3 py-2.5 sm:px-4 sm:py-3
+          aria-current={Astro.url.pathname.replace(/\/$/, "") === "/projects" ? "page" : undefined}
+          aria-keyshortcuts="p"
+          class="group flex items-center justify-center whitespace-nowrap
+        px-2 py-2.5 sm:px-3 sm:py-3
         text-base sm:text-lg lg:text-xl
         font-semibold
         no-underline
@@ -76,8 +82,10 @@ const { nav_suffix } = Astro.props;
 
         <a
           href="/blogs"
-          class="group flex items-center justify-center
-        px-3 py-2.5 sm:px-4 sm:py-3
+          aria-current={(Astro.url.pathname.replace(/\/$/, "") === "/blogs" || Astro.url.pathname.startsWith("/blog/")) ? "page" : undefined}
+          aria-keyshortcuts="b"
+          class="group flex items-center justify-center whitespace-nowrap
+        px-2 py-2.5 sm:px-3 sm:py-3
         text-base sm:text-lg lg:text-xl
         font-semibold
         no-underline
@@ -92,8 +100,10 @@ const { nav_suffix } = Astro.props;
 
         <a
           href="/now"
-          class="group flex items-center justify-center
-        px-3 py-2.5 sm:px-4 sm:py-3
+          aria-current={Astro.url.pathname.replace(/\/$/, "") === "/now" ? "page" : undefined}
+          aria-keyshortcuts="n"
+          class="group flex items-center justify-center whitespace-nowrap
+        px-2 py-2.5 sm:px-3 sm:py-3
         text-base sm:text-lg lg:text-xl
         font-semibold
         no-underline
@@ -108,8 +118,10 @@ const { nav_suffix } = Astro.props;
 
         <a
           href="/gallery"
-          class="group flex items-center justify-center
-        px-3 py-2.5 sm:px-4 sm:py-3
+          aria-current={Astro.url.pathname.replace(/\/$/, "") === "/gallery" ? "page" : undefined}
+          aria-keyshortcuts="g"
+          class="group flex items-center justify-center whitespace-nowrap
+        px-2 py-2.5 sm:px-3 sm:py-3
         text-base sm:text-lg lg:text-xl
         font-semibold
         no-underline
@@ -123,31 +135,22 @@ const { nav_suffix } = Astro.props;
         </a>
       </div>
     </nav>
-  </nav>
-</main>
+  </div>
+</header>
 
 <script>
-  window.addEventListener("keypress", (e) => {
-    console.log(e.key);
-    if (e.key == "b") {
-      window.location.href = "/blogs";
+  // Single-letter shortcuts apply only while the navigation has focus.
+  // This leaves screen-reader shortcuts and ordinary typing available elsewhere.
+  const routes: Record<string, string> = {
+    h: "/", a: "/about", p: "/projects", b: "/blogs", n: "/now", g: "/gallery",
+  };
+  document.querySelector('nav[aria-label="Main navigation"]')?.addEventListener("keydown", (event) => {
+    const e = event as KeyboardEvent;
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || e.repeat || e.defaultPrevented) return;
+    const destination = routes[e.key];
+    if (destination) {
+      e.preventDefault();
+      window.location.href = destination;
     }
-
-    if (e.key == "p") {
-      window.location.href = "/projects";
-    }
-    if (e.key == "h") {
-      window.location.href = "/";
-    }
-    if (e.key == "a") {
-      window.location.href = "/about";
-    }
-    if (e.key == "n") {
-      window.location.href = "/now";
-    }
-    if (e.key == "g") {
-      window.location.href = "/gallery";
-    }
-  
   });
 </script>

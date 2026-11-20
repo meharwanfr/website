@@ -1,10 +1,10 @@
 ---
 import { getImage } from "astro:assets";
 
-const { title, description, pubDate, image, id, link } = Astro.props;
+const { title, description, pubDate, image, id, link, year, stack } = Astro.props;
 let optimizedImage: { src: string } = { src: "" };
 
-if (!image.startsWith("http")) {
+if (image && !image.startsWith("http")) {
   const images = import.meta.glob<{ default: ImageMetadata }>(
     "/src/assets/**/*.{jpeg,jpg,png,gif,webp}",
   );
@@ -15,44 +15,49 @@ if (!image.startsWith("http")) {
     throw new Error(`"${imagePath}" does not exist in glob pattern.`);
   }
   optimizedImage = await getImage({ src: images[imagePath]() });
-} else {
+} else if (image) {
   optimizedImage.src = image;
 }
 ---
 
-<div
-  class="w-full p-3 border border-neutral-300 dark:border-neutral-800 flex flex-col md:flex-row gap-4"
+<article
+  class="w-full min-w-0 p-3 border border-neutral-300 dark:border-neutral-800 flex flex-col md:flex-row gap-4"
 >
-  <a
-    class="block w-full md:w-36 h-48 md:h-36 aspect-square shrink-0 overflow-hidden bg-neutral-500"
+  {image && <a
+    class="block w-full md:w-36 aspect-video md:aspect-square shrink-0 overflow-hidden bg-neutral-500"
     target={!id ? "_blank" : ""}
+    rel={!id ? "noopener noreferrer" : undefined}
     href={!id ? link : `/blog/${id}`}
   >
     <img
-      class="w-full h-full object-cover opacity-70"
+      class="w-full h-full object-cover"
       src={optimizedImage.src}
       alt={title}
+      loading="lazy"
+      decoding="async"
     />
-  </a>
+  </a>}
 
   <div class="w-full flex flex-col justify-between min-w-0">
     <div class="flex flex-col gap-1">
-      <h1 class="font-semibold text-lg leading-snug">
+      <h2 class="font-semibold text-lg leading-snug">
         <a
           class="hover:underline text-2xl md:text-xl"
           target={!id ? "_blank" : ""}
+          rel={!id ? "noopener noreferrer" : undefined}
           href={!id ? link : `/blog/${id}`}>{title}</a
         >
-      </h1>
-      <h3
-        class="text-lg tracking-tight opacity-85 line-clamp-3 md:line-clamp-2"
+      </h2>
+      <p
+        class="text-lg text-secondary leading-relaxed"
       >
         {description}
-      </h3>
+      </p>
     </div>
 
-    <h4 class="text-sm text-right opacity-70 mt-2">
-      {pubDate.toLocaleDateString()}
-    </h4>
+    <div class="flex flex-wrap justify-between gap-x-4 gap-y-1 text-sm text-muted mt-3">
+      {stack && <p class="font-ibm-mono">{stack}</p>}
+      {year ? <p class="ml-auto">{year}</p> : pubDate && <time class="ml-auto" datetime={pubDate.toISOString()}>{pubDate.toLocaleDateString()}</time>}
+    </div>
   </div>
-</div>
+</article>

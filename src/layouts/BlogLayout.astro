@@ -1,9 +1,8 @@
 ---
-import "../global.css";
 import "../copyToClipboard.css";
+import Layout from "./Layout.astro";
+import PageLayout from "./PageLayout.astro";
 import Navbar from "../components/Navbar.astro";
-import Footer from "../components/Footer.astro";
-import { type CollectionEntry } from "astro:content";
 import Card from "../components/Card.astro";
 
 interface Props {
@@ -17,109 +16,53 @@ interface Props {
 }
 
 const { frontmatter } = Astro.props;
-
 const dateObj = new Date(frontmatter.pubDate);
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={frontmatter.description} />
-    <title>{frontmatter.title}</title>
-    <link rel="icon" href="/favicon.jpg" />
-    <script
-      defer
-      src="/stats/script.js"
-      data-host-url="/stats"
-      data-website-id="0e753dd5-654f-4ab0-99ad-31f8be1e7075"></script>
-    <script is:inline>
-      const theme = (() => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
-          return localStorage.getItem("theme");
-        }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
-        return "light";
-      })();
-
-      if (theme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-
-      window.localStorage.setItem("theme", theme);
-    </script>
-  </head>
-
-  <body
-    class="w-screen overflow-x-hidden transition-colors font-mono duration-300 dark:bg-(--dark-bg-0) bg-(--light-bg-0) dark:text-(--dark-fg-0) text-(--light-fg-0) dark:selection:bg-(--dark-selbg) selection:bg-(--light-selbg)"
-  >
-    <Navbar nav_suffix={`/ blog / ${frontmatter.slug}`} />
-
-    <main class="w-screen min-h-[70vh] flex justify-center">
-      <div class="w-3/4 py-3">
-        <br />
-
-        <Card
-          title={frontmatter.title}
-          id={frontmatter.slug}
-          description={frontmatter.description}
-          image={frontmatter.image}
-          pubDate={dateObj}
-        />
-        <br />
-        <div
-          class="prose-p:inline-block prose-p:text-lg prose-li:before:content-['-'] prose-li:before:mr-2 prose-li:before:inline-block
-  prose-h1:font-bold prose-h1:text-3xl
-  prose-a:text-blue-600 prose-p:text-justify prose-img:rounded-xl
-   prose-h2:text-2xl prose-h2:font-semibold prose-h3:text-xl prose-h4:text-[1.1875rem] prose-h5:text-[18px] prose-h6:text-[16px] prose-headings:my-2"
-        >
-          <slot class="prose-span:bg-red-900 prose-pre:relative " />
-        </div>
+<Layout title={frontmatter.title} description={frontmatter.description}>
+  <Navbar nav_suffix={`/ blog / ${frontmatter.slug}`} />
+  <PageLayout>
+    <div class="py-4">
+      <Card
+        title={frontmatter.title}
+        id={frontmatter.slug}
+        description={frontmatter.description}
+        image={frontmatter.image}
+        pubDate={dateObj}
+      />
+      <div class="reading-content mt-8">
+        <slot />
       </div>
-    </main>
+    </div>
+  </PageLayout>
+</Layout>
 
-    <Footer />
-  </body>
+<script>
+  document.querySelectorAll<HTMLPreElement>(".reading-content pre").forEach((pre) => {
+    const code = pre.querySelector("code");
+    if (!code) return;
 
-  <script>
-    const codeblocks = document.querySelectorAll("code");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copyToClipboard";
+    button.setAttribute("aria-label", "Copy code to clipboard");
+    button.innerHTML = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 20.9934V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z"></path></svg>';
+    const label = document.createElement("span");
+    label.textContent = "Copy";
+    label.setAttribute("aria-live", "polite");
+    button.appendChild(label);
+    let resetLabel: ReturnType<typeof setTimeout>;
 
-    const addCopyToClipboardElement = (codeblock: HTMLElement | null) => {
-      if (!codeblock) return;
-
-      const clipboardElem = document.createElement("div");
-      clipboardElem.classList.add("copyToClipboard");
-
-      const clipboardSvg =
-        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4V2H17V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7ZM7 6H5V20H19V6H17V8H7V6ZM9 4V6H15V4H9Z"></path></svg>';
-      clipboardElem.innerHTML = `${clipboardSvg} Copy`;
-
-      clipboardElem.addEventListener("click", () => {
-        navigator.clipboard.writeText(codeblock.textContent);
-
-        clipboardElem.innerHTML = `${clipboardSvg} Copied`;
-
-        setTimeout(() => {
-          clipboardElem.innerHTML = `${clipboardSvg} Copy`;
-        }, 1000);
-      });
-
-      const parentElem = codeblock.parentElement;
-      parentElem?.appendChild(clipboardElem);
-
-      console.log(codeblock.parentElement);
-    };
-
-    codeblocks.forEach((codeblock) => addCopyToClipboardElement(codeblock));
-    // addCopyToClipboardElement(codeblock);
-  </script>
-</html>
+    button.addEventListener("click", async () => {
+      clearTimeout(resetLabel);
+      try {
+        await navigator.clipboard.writeText(code.textContent ?? "");
+        label.textContent = "Copied";
+      } catch {
+        label.textContent = "Copy failed";
+      }
+      resetLabel = setTimeout(() => { label.textContent = "Copy"; }, 2000);
+    });
+    pre.appendChild(button);
+  });
+</script>

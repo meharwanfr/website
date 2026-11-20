@@ -3,66 +3,28 @@ import Card from "../components/Card.astro";
 import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-
-function convertToDate(str: string) {
-  const date = new Date(str);
-  return date;
-}
-
-const projects = [
-  {
-    title: "gh-dlp",
-    desc: "a cli tool to download subfolders of a github repo",
-    link: "https://github.com/meharwanfr/gh-dlp",
-    image: "https://github.com/meharwanfr/gh-dlp/raw/main/assets/demo.png",
-    pubDate: convertToDate("2025"),
-  },
-
-  {
-    title: "purpl",
-    desc: "a fullstack perplexity like ai platform with web searches, follow up questions, LLM streaming response",
-    link: "https://github.com/meharwanfr/purpl",
-    image: "https://github.com/meharwanfr/purpl/raw/main/previews/home.png",
-    pubDate: convertToDate("2026"),
-  },
-
-  {
-    title: "dotfiles",
-    desc: "my linux setup dotfiles",
-    link: "https://github.com/meharwanfr/dotfiles",
-    image:
-      "/src/assets/dotfiles.png",
-    pubDate: convertToDate("2025"),
-  },
-];
+import { projects } from "../data/projects";
 ---
 
 <Layout>
   <Navbar nav_suffix="/ projects" />
   <PageLayout>
+    <h1 class="text-3xl font-semibold mt-4 mb-2">projects</h1>
+    <p class="text-lg mb-5">
+      things i've built, from little terminal tools to games and web apps.
+      more on <a class="underline underline-offset-4" href="https://github.com/meharwanfr?tab=repositories" target="_blank" rel="noopener noreferrer">my github</a>.
+    </p>
     <div class="flex flex-col gap-y-3">
-      {
-        projects.map((project) => (
-          <Card
-            title={project.title}
-            link={project.link}
-            description={project.desc}
-            image={project.image}
-            pubDate={project.pubDate}
-          />
-        ))
-      }
+      {projects.map((project) => (
+        <Card
+          title={project.title}
+          link={project.link}
+          description={project.desc}
+          image={project.image}
+          year={project.year}
+          stack={project.stack}
+        />
+      ))}
     </div>
-<!-- 
-    <div class="w-full h-0.5 mt-10 mb-4 bg-neutral-700"></div>
-    <h1 class="text-3xl font-bold  ">Certificates</h1>
-
-    <div class="w-full h-1/2 py-2 gap-2 mt-3 ">
-      <div class="w-1/2  border-2 border-neutral-800 p-3">
-        <img src="/src/assets/certs/hackzard26.png" class="w-full aspect-video" alt="">
-        <h3 class="opacity-90 pt-2">Hackzard"26 Winner</h3>
-      </div>
-    </div> -->
-
   </PageLayout>
 </Layout>
